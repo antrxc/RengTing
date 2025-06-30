@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends Storage{
     private String name;
     private String playerID;
     private ArrayList<Integer> rollLog;
@@ -23,4 +23,6 @@ public class Player {
     public ArrayList<Integer> getRollLog() {
         return rollLog;
     }
+
+
 }

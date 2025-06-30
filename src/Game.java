@@ -1,4 +1,4 @@
-public class Game {
+public class Game extends Storage{
     private String gameID;
     private int reng;
     private int deposit;
