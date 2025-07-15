@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Storage {
-    private HashMap<Player,String> playerHashMap;
-    private HashMap<Game,String> gameHashMap;
-    private HashMap<String, ArrayList<Game>> gameHistory;
+    private HashMap<Player,String> playerHashMap; // Player and PlayerID
+    private HashMap<Game,String> gameHashMap; // Game and GameID
+    private HashMap<String, ArrayList<Game>> gameHistory; // PlayerID and Game history 
 
     public Storage(){
         playerHashMap = new HashMap<>();
@@ -28,5 +28,6 @@ public class Storage {
         playerHistory = gameHistory.get(playerID);
         return playerHistory;
     }
+
 }
 

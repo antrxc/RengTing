@@ -6,4 +6,11 @@ public class GameUtils {
         return diceFace;
     }
 
+    public void moveUp(Game game){
+        game.reng += 1;
+    }
+
+    public void moveDown(Game game){
+        game.reng -= 1;
+    }
 }

@@ -9,7 +9,11 @@ public class Player extends Storage{
         this.name = name;
         this.rollLog = new ArrayList<>();
         //TODO add a function to generate playerID in GameUtils
-        //this.playerID =
+        this.playerID =  generate();
+    }
+
+    public String generate(){
+
     }
 
     public String getName(){
