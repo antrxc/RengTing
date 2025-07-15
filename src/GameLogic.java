@@ -17,7 +17,7 @@ public class GameLogic {
 
         int deposit = game.getDeposit();
         int current = game.getCurrent();
-        int state = 0; // game state -> penalty, upward, no change, etc...
+        State state = State.NEUTRAL; // game state -> penalty, upward, no change, etc...
         ArrayList<Integer> diceRolls = new ArrayList<>();
         while(true){
             diceFace = gm.diceroll();
@@ -29,7 +29,7 @@ public class GameLogic {
         }
     }
 
-    public void updateReng(Game game){
+    public void updateReng(Game game,State state){
 
     }
 }
