@@ -1,26 +1,26 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class Player extends Storage{
+public class Player extends Storage {
     private String name;
     private String playerID;
     private ArrayList<Integer> rollLog;
 
-    public Player (String name){
+    public Player(String name) {
         this.name = name;
         this.rollLog = new ArrayList<>();
-        //TODO add a function to generate playerID in GameUtils
-        this.playerID =  generate();
+        this.playerID = generatePlayerID();
     }
 
-    public String generate(){
-
+    private String generatePlayerID() {
+        return "PLAYER-" + UUID.randomUUID().toString().substring(0, 8);
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getPlayerID(){
+    public String getPlayerID() {
         return playerID;
     }
 
@@ -28,5 +28,7 @@ public class Player extends Storage{
         return rollLog;
     }
 
-
+    public void logRoll(int roll) {
+        rollLog.add(roll);
+    }
 }
