@@ -1,19 +1,16 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class Player extends Storage {
-    private String name;
-    private String playerID;
-    private ArrayList<Integer> rollLog;
+public class Player {
+    private final String name;
+    private final String playerID;
+    private final List<Integer> rollLog;
 
     public Player(String name) {
         this.name = name;
+        this.playerID = "PLAYER-" + UUID.randomUUID().toString().substring(0, 8);
         this.rollLog = new ArrayList<>();
-        this.playerID = generatePlayerID();
-    }
-
-    private String generatePlayerID() {
-        return "PLAYER-" + UUID.randomUUID().toString().substring(0, 8);
     }
 
     public String getName() {
@@ -24,8 +21,8 @@ public class Player extends Storage {
         return playerID;
     }
 
-    public ArrayList<Integer> getRollLog() {
-        return rollLog;
+    public List<Integer> getRollLog() {
+        return new ArrayList<>(rollLog);
     }
 
     public void logRoll(int roll) {

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,7 +18,10 @@ public class Main {
                     System.out.print("👤 Enter Player Name: ");
                     String name = sc.nextLine();
                     Player player = new Player(name);
-                    storage.getPlayerHashMap().put(player, player.getPlayerID());
+                    storage.addPlayer(player);
+
+                    // 🆕 Display Player ID
+                    System.out.println("🆔 Your Player ID: " + player.getPlayerID());
 
                     int deposit = 0;
                     while (deposit <= 0) {
@@ -33,7 +37,7 @@ public class Main {
                     }
 
                     Game game = new Game(player, deposit);
-                    storage.getGameHashMap().put(game, game.getGameID());
+                    storage.addGame(game);
 
                     GameLogic logic = new GameLogic();
                     logic.start(game);
@@ -55,8 +59,34 @@ public class Main {
                     System.out.println("👋 Thanks for playing!");
                     break;
 
+                case "4":
+                    System.out.print("🔍 Enter Player ID: ");
+                    String pid = sc.nextLine().trim();
+
+                    if (!storage.playerExists(pid)) {
+                        System.out.println("❌ No such player found.");
+                        break;
+                    }
+
+                    ArrayList<Game> history = new ArrayList<>(storage.getGameHistory(pid));
+                    if (history.isEmpty()) {
+                        System.out.println("📭 No games found for this player.");
+                    } else {
+                        System.out.println("\n📜 Game History:");
+                        for (Game g : history) {
+                            System.out.println("═════════════════════════════════");
+                            System.out.println("🆔 Game ID: " + g.getGameID());
+                            System.out.println("👤 Player: " + g.getPlayer().getName());
+                            System.out.println("💵 Deposit: ₹" + g.getDeposit());
+                            System.out.println("🎯 Final Reng: " + g.getReng());
+                            System.out.println("🏆 Final Winnings: ₹" + g.getCurrent());
+                            System.out.println("🎲 Rolls: " + g.getPlayer().getRollLog());
+                        }
+                    }
+                    break;
+
                 default:
-                    System.out.println("❌ Invalid choice. Please enter 1, 2 or 3.");
+                    System.out.println("❌ Invalid choice. Please enter 1, 2, 3 or 4.");
             }
         }
 
@@ -69,6 +99,7 @@ public class Main {
         System.out.println("1️⃣  Start New Game");
         System.out.println("2️⃣  Help / Rules");
         System.out.println("3️⃣  Exit");
+        System.out.println("4️⃣  View Game History");
         System.out.println("═════════════════════════");
         System.out.print("👉 Your Choice: ");
     }

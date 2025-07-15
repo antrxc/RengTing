@@ -7,9 +7,7 @@ public class GameLogic {
         UPWARD
     }
 
-    private static final int[] MULTIPLIERS = {
-            0, 21, 25, 31, 36, 45, 60, 78, 100, 130, 200
-    };
+    private static final int[] MULTIPLIERS = { 0, 21, 25, 31, 36, 45, 60, 78, 100, 130, 200 };
 
     public void start(Game game) {
         GameUtils utils = new GameUtils();
@@ -53,8 +51,6 @@ public class GameLogic {
 
             System.out.printf("🎲 You rolled: %d\n", roll);
 
-            // Game logic rules
-
             if (currentState == State.NEUTRAL && roll < 5) {
                 if (game.getReng() == 0 && hasReachedReng1) {
                     DisplayUtils.printError("Game Over: PENALTY at Reng 0 after progress.");
@@ -70,7 +66,6 @@ public class GameLogic {
             } else if (currentState == State.PENALTY) {
                 if (roll < 4) {
                     game.updateReng(-1);
-                    if (game.getReng() < 0) game.updateReng(-game.getReng());
                     DisplayUtils.printWarning("You dropped! Reng is now: " + game.getReng());
                 } else {
                     game.setState(State.NEUTRAL);
@@ -98,7 +93,6 @@ public class GameLogic {
                 hasReachedReng1 = true;
             }
 
-            // Update winnings
             int reng = game.getReng();
             if (reng > 0 && reng < MULTIPLIERS.length) {
                 int current = (game.getDeposit() * MULTIPLIERS[reng]) / 100;
@@ -123,6 +117,6 @@ public class GameLogic {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return utils.diceroll(); // your original dice roll method
+        return utils.diceroll();
     }
 }

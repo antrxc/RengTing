@@ -1,64 +1,42 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Storage {
-    // Maps Player object to their PlayerID (String)
-    private HashMap<Player, String> playerHashMap;
+    private final HashMap<Player, String> playerHashMap = new HashMap<>();
+    private final HashMap<Game, String> gameHashMap = new HashMap<>();
+    private final HashMap<String, List<Game>> gameHistory = new HashMap<>();
 
-    // Maps Game object to their GameID (String)
-    private HashMap<Game, String> gameHashMap;
-
-    // Maps PlayerID (String) to a list of Games played (game history)
-    private HashMap<String, ArrayList<Game>> gameHistory;
-
-    public Storage() {
-        playerHashMap = new HashMap<>();
-        gameHashMap = new HashMap<>();
-        gameHistory = new HashMap<>();
-    }
-
-    // Add a player to storage
     public void addPlayer(Player player) {
         playerHashMap.put(player, player.getPlayerID());
     }
 
-    // Add a game to storage and register it under the player’s game history
     public void addGame(Game game) {
         gameHashMap.put(game, game.getGameID());
 
         String playerID = game.getPlayer().getPlayerID();
-        ArrayList<Game> history = gameHistory.getOrDefault(playerID, new ArrayList<>());
+        List<Game> history = gameHistory.getOrDefault(playerID, new ArrayList<>());
         history.add(game);
         gameHistory.put(playerID, history);
     }
 
-    // Get all players (Player -> PlayerID)
-    public HashMap<Player, String> getPlayerHashMap() {
-        return playerHashMap;
-    }
-
-    // Get all games (Game -> GameID)
-    public HashMap<Game, String> getGameHashMap() {
-        return gameHashMap;
-    }
-
-    // Get full game history map (PlayerID -> List of Games)
-    public HashMap<String, ArrayList<Game>> getGameHistoryMap() {
-        return gameHistory;
-    }
-
-    // Get game history for a specific playerID (returns empty list if none)
-    public ArrayList<Game> getGameHistory(String playerID) {
-        return gameHistory.getOrDefault(playerID, new ArrayList<>());
-    }
-
-    // Check if player exists by playerID
     public boolean playerExists(String playerID) {
         return playerHashMap.containsValue(playerID);
     }
 
-    // Check if game exists by gameID
-    public boolean gameExists(String gameID) {
-        return gameHashMap.containsValue(gameID);
+    public HashMap<Player, String> getPlayerMap() {
+        return new HashMap<>(playerHashMap);
+    }
+
+    public HashMap<Game, String> getGameMap() {
+        return new HashMap<>(gameHashMap);
+    }
+
+    public List<Game> getGameHistory(String playerID) {
+        return gameHistory.getOrDefault(playerID, new ArrayList<>());
+    }
+
+    public HashMap<String, List<Game>> getAllHistories() {
+        return new HashMap<>(gameHistory);
     }
 }
